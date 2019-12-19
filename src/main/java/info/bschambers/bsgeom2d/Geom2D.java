@@ -1,4 +1,4 @@
-package info.bschambers.geom;
+package info.bschambers.bsgeom2d;
 
 /**
  * Static methods for 2D geometry.

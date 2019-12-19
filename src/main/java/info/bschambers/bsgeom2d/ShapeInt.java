@@ -1,4 +1,4 @@
-package info.bschambers.geom;
+package info.bschambers.bsgeom2d;
 
 import java.util.ArrayList;
 import java.util.Iterator;

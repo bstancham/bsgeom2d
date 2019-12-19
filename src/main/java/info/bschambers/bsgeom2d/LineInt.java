@@ -1,6 +1,6 @@
-package info.bschambers.geom;
+package info.bschambers.bsgeom2d;
 
-import info.bschambers.geom.Geom2D.LinesParallelException;
+import info.bschambers.bsgeom2d.Geom2D.LinesParallelException;
 
 /**
  * An immutable data structure representing a two-dimensional line

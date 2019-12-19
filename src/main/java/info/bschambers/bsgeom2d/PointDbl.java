@@ -1,4 +1,4 @@
-package info.bschambers.geom;
+package info.bschambers.bsgeom2d;
 
 /**
  * Immutable data type representing a 2D point with

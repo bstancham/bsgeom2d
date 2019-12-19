@@ -1,4 +1,4 @@
-package info.bschambers.geom;
+package info.bschambers.bsgeom2d;
 
 public final class BoxInt {
 

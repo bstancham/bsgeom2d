@@ -1,4 +1,4 @@
-package info.bschambers.geom;
+package info.bschambers.bsgeom2d;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
