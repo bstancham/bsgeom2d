@@ -1,0 +1,30 @@
+package info.bstancham.bsgeom2d.testgui;
+
+import java.awt.Graphics;
+import java.awt.Color;
+import info.bstancham.bsgeom2d.testgui.gui.*;
+import info.bstancham.bsgeom2d.Shape;
+
+public class FaceTestTestMode extends ShapeTestMode {
+
+    public FaceTestTestMode(Shape[] shapes) {
+        super(shapes);
+    }
+
+
+    // /**
+    //  * Paints current shape at mouse position.
+    //  */ 
+    // @Override
+    // public void paint(Graphics g) {
+    //     super.paint(g);
+    //     g.setColor(Color.MAGENTA);
+    //     Shape s = translateShape(zoomShape(currentShape()),
+    //                              // getX(mouseX()), getY(mouseY()));
+    //                              toScreenX(cursorX()), toScreenY(cursorY()));
+    //                              // mouseX(), mouseY());
+    //     // g.drawPolygon(s.getXs(), s.getYs(), s.getXs().length);
+    //     g.drawPolygon(s.getXs(), s.getYs(), s.getXs().length);
+    // }
+    
+}

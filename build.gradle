@@ -7,46 +7,56 @@
  * user guide available at https://docs.gradle.org/2.10/userguide/tutorial_java_projects.html
  */
 
-// Apply the java plugin to add support for Java
-apply plugin: 'java'
-
-// In this section you declare where to find the dependencies of your project
+plugins {
+    id 'java-library'
+}
 repositories {
-    // Use 'jcenter' for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+    mavenCentral()
 }
 
-// In this section you declare the dependencies for your production and test code
 dependencies {
-    // The production code uses the SLF4J logging API at compile time
-    compile 'org.slf4j:slf4j-api:1.7.13'
-
-    // Declare the dependency for your favourite test framework you want to use in your tests.
-    // TestNG is also supported by the Gradle Test task. Just change the
-    // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
-    // 'test.useTestNG()' to your build script.
-    testCompile 'junit:junit:4.12'
+    // Use JUnit test framework
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.0.0'
 }
 
 // add command line options to compiler
 tasks.withType(JavaCompile) {
   options.compilerArgs << "-Xlint:deprecation"
+  options.compilerArgs << "-Xlint:unchecked"
 }
 
+jar {
+    manifest {
+        attributes 'bsgeom2d-version': "git describe".execute().text
+    }
+}
 
-// copies final jar file to ~/lib/
+task compileTestgui(type: JavaCompile) {
+    dependsOn jar
+    dependsOn test
+    source = fileTree(dir: 'src/testgui', include: '**/*.java')
+    destinationDirectory = file('build/classes/java/testgui')
+    classpath = files('build/classes/java/main')
+}
+
+javadoc {
+    include 'info/bstancham/bsgeom2d/*'
+    include 'info/bstancham/bsgeom2d/testgui/*'
+    options.addBooleanOption('html5', true)
+}
+
 task copyToLib(type: Copy) {
     description 'Copies final jar file into ~/lib/'
+    dependsOn build
+    dependsOn jar
+    dependsOn test
+    String homeDir = System.getProperty('user.home');
     from 'build/libs/bsgeom2d.jar'
-    into '/home/bsc/lib' // '/bsgeom.jar'
-    //dependsOn 'build'
+    into homeDir + '/lib'
 }
 
-copyToLib.dependsOn build
-
-copyToLib.mustRunAfter build
-
-task all {}
-
-all.dependsOn copyToLib
+task all {
+    dependsOn copyToLib
+    dependsOn compileTestgui
+}
